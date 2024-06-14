@@ -10,7 +10,7 @@ class Background extends GameObject {
 
 
 class Player extends GameObject {
-    constructor() { super(540, 960, 100, 100); this.a = 0; this.speed = 0.4; this.dir = false; }
+    constructor() { super(540, 960, 100, 100); this.a = 0; this.speed = 0.6; this.dir = false; }
 
     update() {
         this.transform.position.x = 540 + 400 * Math.cos(this.a);
@@ -57,13 +57,13 @@ class LevelGenerator extends GameObject {
 
     spawn() {
         let x = float2int(random() * 980) + 50; objects.push(new Bomb(x));
-        this.timeout = float2int((1.7 + random() * 0.5 * (1 - this.confusion)) * 100) / 100 - this.confusion;
+        this.timeout = float2int((1.5 + random() * 0.5 * (1 - this.confusion)) * 100) / 100 - this.confusion;
     }
 }
 
 
 class FallingObject extends GameObject {
-    constructor(x) { super(x, -50, 100, 100); this.a = 0; this.m = 10; }
+    constructor(x) { super(x, -50, 100, 100); this.a = 0; this.m = 60; }
 
     update() {
         this.a += 1/60 * this.m; this.transform.position.y += this.a;
@@ -145,7 +145,7 @@ class SceneControl extends GameObject {
 
     update() {
         if (!this.move) return; clearTransform(this.transform, 3);
-        this.transform.position.y -= 120; if(this.transform.position.y == 960) { this.clearObjects(); this.scenes[this.scene](); }
+        this.transform.position.y -= 240; if(this.transform.position.y == 960) { this.clearObjects(); this.scenes[this.scene](); }
         if (this.transform.position.y == -960) this.move = false;
     }
 
