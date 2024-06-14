@@ -49,11 +49,7 @@ function lateUpdate() { objects.forEach((object) => { if(object.lateUpdate) obje
 
 
 const FPS = 60; const interval = 1000 / FPS;
-let last_tick, timeout;
 
-function tick() {
-  update(); collisions(); lateUpdate(); timeout = interval - (Date.now() - last_tick);
-  setTimeout(tick, timeout > 0 ? timeout : 0); last_tick = Date.now();
-}
+function tick() { update(); collisions(); lateUpdate(); }
 
-tick();
+setInterval(tick, interval);
